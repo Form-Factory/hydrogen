@@ -41,6 +41,12 @@ export default {
       ]);
 
       /**
+       * Example implemention of cache supression.
+       */
+      const { searchParams } = new URL(request.url);
+      const disableCache = searchParams.get('disable-cache') === 'true';
+
+      /**
        * Create Hydrogen's Storefront client.
        */
       const {storefront} = createStorefrontClient({
@@ -52,6 +58,7 @@ export default {
         storeDomain: env.PUBLIC_STORE_DOMAIN,
         storefrontId: env.PUBLIC_STOREFRONT_ID,
         storefrontHeaders: getStorefrontHeaders(request),
+        disableCache,
       });
 
       /**
